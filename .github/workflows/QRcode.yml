@@ -1,4 +1,4 @@
-name: login
+name: QRcode
 on:
   workflow_dispatch:
   # push:
@@ -14,9 +14,4 @@ jobs:
         with:
           node-version: 18
       - run: npm run install
-      - run: npm run login
-        env:
-          PHONE: ${{ secrets.PHONE }}
-          CODE: ${{ secrets.CODE }}
-          KEY: ${{ secrets.KEY }}
-          USERID: ${{ secrets.USERID }}
+      - run: npm run qrcode
