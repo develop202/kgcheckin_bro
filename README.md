@@ -42,10 +42,13 @@ GitHub Actions 实现 `酷狗概念VIP` 自动签到
 1. Fork 本仓库
 
 1. 登录方式
+
    2.1 二维码(推荐)
+
    运行 Actions `QRcode` 成功后复制key和二维码链接，二维码链接粘到浏览器打开，用酷狗概念版扫描并确认登录(二维码过期较快，请尽快扫码确认)。确认登录后把key添加到 Secret `KEY` （什么？不知道 Secret在哪？[点我](#secret)）
 
    2.2 手机号
+
    添加手机号到 Secret `PHONE`，运行 Actions `sent` 获取验证码，添加收到的验证码到 Secret `CODE`。在APP我的->右上角设置->账号和绑定设置->复制酷狗ID，添加到Secret `USERID`
 
 1. 运行 Actions `login` 成功后复制 `token` 和 `userid`并添加到 Secret `TOKEN` `USERID`
