@@ -6,7 +6,7 @@
 GitHub Actions 实现 `酷狗概念VIP` 自动签到
 每天领取总计 `两天酷狗概念VIP`
 
-提供二维码登录(推荐)和手机号登录
+提供二维码登录(推荐)和手机号登录(一个手机号绑定多个账号无法登录,见 [多账号登录问题](https://github.com/MakcRe/KuGouMusicApi/issues/51))
 
 > [!warning]
 > 注意事项
@@ -49,7 +49,7 @@ GitHub Actions 实现 `酷狗概念VIP` 自动签到
 
    2.2 手机号
 
-   添加手机号到 Secret `PHONE`，运行 Actions `sent` 获取验证码，添加收到的验证码到 Secret `CODE`。在APP我的->右上角设置->账号和绑定设置->复制酷狗ID，添加到Secret `USERID`
+   添加手机号到 Secret `PHONE`，运行 Actions `sent` 获取验证码，添加收到的验证码到 Secret `CODE`
 
 1. 运行 Actions `login` 成功后复制 `token` 和 `userid`并添加到 Secret `TOKEN` `USERID`
 

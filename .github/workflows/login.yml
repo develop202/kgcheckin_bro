@@ -19,4 +19,3 @@ jobs:
           PHONE: ${{ secrets.PHONE }}
           CODE: ${{ secrets.CODE }}
           KEY: ${{ secrets.KEY }}
-          USERID: ${{ secrets.USERID }}
