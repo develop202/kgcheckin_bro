@@ -19,7 +19,7 @@ jobs:
           cache-dependency-path: ./api/package-lock.json
       - name: 安装依赖
         run: npm run install
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
       - name: 登录
         run: npm run login
         env:
