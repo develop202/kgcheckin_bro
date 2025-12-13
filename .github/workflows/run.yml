@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'npm'
+          cache: './api/node_modules'
           cache-dependency-path: ./api/package-lock.json
       - name: 安装依赖
         run: npm run install
