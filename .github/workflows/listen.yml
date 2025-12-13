@@ -12,6 +12,7 @@ jobs:
       - name: 检出仓库
         uses: actions/checkout@v3
       - name: 创建node
+        id: cache-npm
         uses: actions/setup-node@v3
         with:
           node-version: 18
