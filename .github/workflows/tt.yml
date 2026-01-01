@@ -21,6 +21,13 @@ jobs:
           cache-dependency-path: ./api/package-lock.json
       - name: 安装qrencode
         run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          sed -i 's|<img src="[^"]*" alt="登录二维码" width="200"\\/>|<img src="./imgs/步骤二.jpg" alt="登录二维码" width="200"\\/>|' README.md
+          sed -i 's|<sub>修改.*<\\/sub>|<sub>状态: 巴拉巴拉<\\/sub>|' README.md
+          git add -A
+          git commit -m "chore: 测试 [skip ci]"
+          git push --quiet --force-with-lease
           sudo apt update
           apt search qrencode
           sudo apt install qrencode

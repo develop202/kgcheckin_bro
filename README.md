@@ -26,6 +26,15 @@ GitHub Actions 实现 `酷狗概念VIP` 自动签到
 
 两种登录方式任选其一，同时使用两种登录则优先二维码登录
 
+<div align="center">
+  <img src="./imgs/步骤一.jpg" alt="登录二维码" width="200"/>
+  <br/>
+  <sub>233</sub>
+  <br>
+  <sub>修改:hxjnxk</sub>
+  <br>
+</div>
+
 1. Fork 本仓库
 
 1. 登录
