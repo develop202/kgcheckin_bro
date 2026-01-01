@@ -28,10 +28,12 @@ jobs:
           node tt.js
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
           sed -i 's|src=".*/imgs/步骤一.*jpg"|src="\./imgs/步骤二\.jpg"|' README.md
           sed -i 's|修改*|状态: 巴拉巴拉|' README.md
-          git add -A
+          git add .
           git commit -m "chore: 测试 [skip ci]"
-          git push --quiet --force-with-lease
+          git push
         env:
           NUMBER: ${{ github.event.inputs.number }}
