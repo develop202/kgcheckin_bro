@@ -8,7 +8,7 @@ GitHub Actions 实现 `酷狗概念VIP` 自动签到
 
 提供二维码登录(推荐)和手机号登录(一个手机号绑定多个账号无法登录,见 [多账号登录问题](https://github.com/MakcRe/KuGouMusicApi/issues/51))
 
-感谢 [@itfw](https://github.com/itfw) 提供二维码显示问题的解决方案
+感谢 [@itfw](https://github.com/itfw) 提供二维码显示问题的解决方案<br>
 感谢 [@klaas8](https://github.com/klaas8) 提供自动写入secret的方法
 
 > [!warning]
@@ -34,7 +34,7 @@ GitHub Actions 实现 `酷狗概念VIP` 自动签到
 
 1. 登录
 
-   2.1 二维码(推荐)
+   2.1 二维码(推荐)<br>
    自动写入secret(可选)
    - **创建令牌**  
      复制下方官网链接，在浏览器中打开
@@ -52,7 +52,7 @@ GitHub Actions 实现 `酷狗概念VIP` 自动签到
    - 滑动到底部，点击绿色的 Generate token 保存按钮
    - 复制生成的字符串 (ghp\_开头)，回到本仓库添加到`Secret` 变量名 `PAT` value `复制的令牌`
 
-   填入登录账号数量，运行 Actions `qrcodeLogin` 并进入(若不显示,可以刷新页面)，点击run -> 展开二维码登录, 根据提示操作即可。
+   运行 Actions `qrcodeLogin` 并进入(若不显示,可以刷新页面)，点击run -> 展开二维码登录, 根据提示操作即可。
 
    2.2 手机号
 
