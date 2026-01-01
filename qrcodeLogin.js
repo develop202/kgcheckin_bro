@@ -1,5 +1,5 @@
+import { execSync } from "child_process";
 import { close_api, delay, send, startService } from "./utils/utils.js";
-import { execSync } from 'child_process'
 
 async function qrcode() {
 
@@ -8,7 +8,9 @@ async function qrcode() {
   await delay(2000)
   let qrcode = ""
   const userinfo = []
-  const number = parseInt(process.env.NUMBER)
+  const args = process.argv.slice(2);
+  const number = parseInt(process.env.NUMBER || args[0] || "1")
+  const pat = process.env.PAT
   try {
     for (let i = 0; i < number; i++) {
       // 二维码
@@ -16,19 +18,19 @@ async function qrcode() {
       if (result.status === 1) {
         qrcode = result.data.qrcode
         const img_base64 = result.data.qrcode_img;
-        const buffer = Buffer.from(img_base64, "base64")
+        const chunkSize = 1000;
+        console.log("二维码链接如下, 请在浏览器打开使用APP扫描并确认登录")
+        for (let i = 0; i < img_base64.length; i += chunkSize) {
+          console.log(img_base64.slice(i, i + chunkSize));
+        }
       } else {
         console.log("响应内容")
         console.dir(result, { depth: null })
         throw new Error("请求出错")
       }
-      if (qrcode == "") {
-        throw new Error("二维码异常")
-      }
-      console.log()
       console.log("正在等待，请扫描二维码并确定登录")
       // 登录
-      for (let i = 0; i < 50; i++) {
+      for (let i = 0; i < 25; i++) {
         const timestrap = Date.now();
         const res = await send(`/login/qr/check?key=${qrcode}&timestrap=${timestrap}`, "GET", {})
         const status = res?.data?.status
@@ -46,9 +48,6 @@ async function qrcode() {
             break
           case 4:
             console.log("登录成功！")
-            console.log("第一行是token,第二行是userid")
-            console.log(res.data.token)
-            console.log(res.data.userid)
             userinfo.push({
               userid: res.data.userid,
               token: res.data.token
@@ -58,13 +57,24 @@ async function qrcode() {
             console.log("请求出错")
             console.dir(res, { depth: null })
         }
-        if (status == 4) {
+        if (status == 4 || status == 0) {
           break
         }
-        await delay(2000)
+        if (i == 24) {
+          console.log("等待超时\n")
+          break
+        }
+        await delay(5000)
       }
     }
-    execSync("")
+    const userinfoJSON = JSON.stringify(userinfo)
+    if (pat) {
+      execSync(`gh secret set USERINFO -b"${userinfoJSON}" --repo ${process.env.GITHUB_REPOSITORY}`);
+      console.log("secret <USERINFO> 更改成功")
+    } else {
+      console.log("登录信息如下，把它添加到secret USERINFO 即可")
+      console.log(userinfoJSON)
+    }
   } finally {
     close_api(api)
   }
