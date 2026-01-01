@@ -12,7 +12,7 @@ jobs:
     timeout-minutes: 2
     steps:
       - name: 检出仓库
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: 创建node
         uses: actions/setup-node@v3
         with:
@@ -21,6 +21,11 @@ jobs:
           cache-dependency-path: ./api/package-lock.json
       - name: 安装qrencode
         run: |
+          sudo apt update
+          apt search qrencode
+          sudo apt install qrencode
+          qrencode -t ANSI "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYMAAAGDAQMAAADzqu5RAAAABlBMVEUAAAD///+l2Z/dAAAAAnRSTlP//8i138cAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAMiSURBVHic7ZsxkqQwDEVFdUDIEfooHA2OxlE4woQdUK219L9s2I0m01bJydDGz4mw9CV5RH87pIhkxC4Y7ccps35FtvYgr/Yg67l8Xm2Rz/hYi8hHrGbJrxOLP+y2MPaQRviMG3wvIiMBCzfjv/WDB3FT2/iZ8Zd7FJGauBlWnbADPV8wfhH/AwHz0u/ioS2cFA64iLSELfs+Q+jSZ2b963MoIh0RCz1gxvH954GrishH9NEip8dJP6za3O1dxo5lRWQjwp6qRyMsThqKhYLI2fOPIjISNjxNbIb9kRCtYgFzO958ZYPRtYh8xImjuR02P0G96vXMILFZM34RCQmaenfDusnN70K00u+25NJm+qktIhHRFnqcpAia9FEMEBxfP8c21iIyEoJSzSELDcsCqnlir62OUUQ+whdqSNQL04qM3/Tsxa+AnriIfERXOiy2PbQqKqmmcIGuRaQj3J79aHrkPN5QOhhTJJehXovIRdi4eVkuZOKoCKEhY0cVp4hMxBn9qHvvAnqWplZLJWXo3SIyEegATzrUa+Qf/By+/C4oY4vIRpj2odIRtCzaTMTJ03fB7BX9qCLSEQJ36wJHogSu9zrcSn0kRWQkWPnelCF0O1gViM1Qh5ORsRSRiUDvwg/rQPHe0w4N4w9PXUQqwnSN8loiW/e2nPkHr7lxTfjdIjIRO+vcZliUS6Ot4cf384o7p/KoARSRhoBzRR2uh0fW4byboVEd16Fei0hE7HEdQ3iPZpRUN8XgHqF9ikhGMMmgerXEMTyxmKnxSm+18CLSEcj4/QHHF3vYe/Sj7g3/InISMkKo9ipOHGj3zT42LSIjMZoYeK8jcvbLwripUURKoueLo5ux9HsZc78A3m+3FZGL6KP9ujWmmJEoL0mNV0VkI3a6VI2bNZCxIvdW1Xr2/2ArIh2x2t/v7fgicorA5nyFjmKc8yJSEWFYN32XsUwcKYL4XRSRmhgLT+G/4EMEeYnOZVERuYm4TxqiVVlApcWfereIPAT9roaFxVNJQX8D9zKORyW1iFwELTraUFsUb2Q0OrhGi8hH/HYUkYv4A573Et73RdALAAAAAElFTkSuQmCC"
+          node tt.js
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
           sed -i 's|src=".*/imgs/步骤一.*jpg"|src="\./imgs/步骤二\.jpg"|' README.md
@@ -28,10 +33,5 @@ jobs:
           git add -A
           git commit -m "chore: 测试 [skip ci]"
           git push --quiet --force-with-lease
-          sudo apt update
-          apt search qrencode
-          sudo apt install qrencode
-          qrencode -t ANSI "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYMAAAGDAQMAAADzqu5RAAAABlBMVEUAAAD///+l2Z/dAAAAAnRSTlP//8i138cAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAMiSURBVHic7ZsxkqQwDEVFdUDIEfooHA2OxlE4woQdUK219L9s2I0m01bJydDGz4mw9CV5RH87pIhkxC4Y7ccps35FtvYgr/Yg67l8Xm2Rz/hYi8hHrGbJrxOLP+y2MPaQRviMG3wvIiMBCzfjv/WDB3FT2/iZ8Zd7FJGauBlWnbADPV8wfhH/AwHz0u/ioS2cFA64iLSELfs+Q+jSZ2b963MoIh0RCz1gxvH954GrishH9NEip8dJP6za3O1dxo5lRWQjwp6qRyMsThqKhYLI2fOPIjISNjxNbIb9kRCtYgFzO958ZYPRtYh8xImjuR02P0G96vXMILFZM34RCQmaenfDusnN70K00u+25NJm+qktIhHRFnqcpAia9FEMEBxfP8c21iIyEoJSzSELDcsCqnlir62OUUQ+whdqSNQL04qM3/Tsxa+AnriIfERXOiy2PbQqKqmmcIGuRaQj3J79aHrkPN5QOhhTJJehXovIRdi4eVkuZOKoCKEhY0cVp4hMxBn9qHvvAnqWplZLJWXo3SIyEegATzrUa+Qf/By+/C4oY4vIRpj2odIRtCzaTMTJ03fB7BX9qCLSEQJ36wJHogSu9zrcSn0kRWQkWPnelCF0O1gViM1Qh5ORsRSRiUDvwg/rQPHe0w4N4w9PXUQqwnSN8loiW/e2nPkHr7lxTfjdIjIRO+vcZliUS6Ot4cf384o7p/KoARSRhoBzRR2uh0fW4byboVEd16Fei0hE7HEdQ3iPZpRUN8XgHqF9ikhGMMmgerXEMTyxmKnxSm+18CLSEcj4/QHHF3vYe/Sj7g3/InISMkKo9ipOHGj3zT42LSIjMZoYeK8jcvbLwripUURKoueLo5ux9HsZc78A3m+3FZGL6KP9ujWmmJEoL0mNV0VkI3a6VI2bNZCxIvdW1Xr2/2ArIh2x2t/v7fgicorA5nyFjmKc8yJSEWFYN32XsUwcKYL4XRSRmhgLT+G/4EMEeYnOZVERuYm4TxqiVVlApcWfereIPAT9roaFxVNJQX8D9zKORyW1iFwELTraUFsUb2Q0OrhGi8hH/HYUkYv4A573Et73RdALAAAAAElFTkSuQmCC"
-          node tt.js
         env:
           NUMBER: ${{ github.event.inputs.number }}
