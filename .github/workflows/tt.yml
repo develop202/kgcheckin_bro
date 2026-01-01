@@ -33,7 +33,6 @@ jobs:
       - name: 推送
         run: |
           if ! git diff --quiet --exit-code || [ -n "$(git status --porcelain)" ]; then
-            git config --global --unset credential.helper
             git config user.name "GitHub Actions"
             git config user.email "actions@github.com"
             git add .
