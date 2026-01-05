@@ -1,4 +1,4 @@
-> [!CAUTION] 注意
+> [!CAUTION]
 > 这个是克隆项目，原项目地址在 [kgcheckin](https://github.com/develop202/kgcheckin.git)
 
 # 酷狗签到
